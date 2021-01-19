@@ -9,6 +9,7 @@
       rows="10"
     ></textarea>
     <input type="button" value="Find Solution" @click="solve()" />
+    <p v-if="solution">The solution is: {{ solution }}</p>
   </div>
 </template>
 
@@ -17,6 +18,7 @@ export default {
   data() {
     return {
       puzzleData: '',
+      solution: null,
     };
   },
   computed: {
@@ -25,7 +27,27 @@ export default {
     },
   },
   methods: {
-    solve() {},
+    solve() {
+      const numObject = {};
+      const solutionNums = [];
+
+      this.puzzleArray.forEach((item, index) => {
+        numObject[item] = index;
+      });
+
+      for (let i = 0; i < this.puzzleArray.length; i++) {
+        const diff = 2020 - this.puzzleArray[i];
+        if (
+          Object.prototype.hasOwnProperty.call(numObject, diff) &&
+          numObject[diff] !== i
+        ) {
+          solutionNums[0] = this.puzzleArray[i];
+          solutionNums[1] = this.puzzleArray[numObject[diff]];
+        }
+      }
+
+      this.solution = solutionNums[0] * solutionNums[1];
+    },
   },
 };
 </script>
