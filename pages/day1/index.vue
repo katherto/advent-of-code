@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="wrapper mx-auto max-w-lg flex flex-col items-center">
-      <h1 class="text-5xl">Day 1 Exercise</h1>
+      <h1 class="text-5xl font-bold">Day 1 Exercise</h1>
       <PrimaryLink
         :link="{
           src: 'https://adventofcode.com/2020/day/1/input',
@@ -53,16 +53,18 @@ export default {
         numObject[item] = index;
       });
 
-      for (let i = 0; i < this.puzzleArray.length; i++) {
-        const diff = 2020 - this.puzzleArray[i];
+      this.puzzleArray.every((item, index) => {
+        const diff = 2020 - item;
         if (
           Object.prototype.hasOwnProperty.call(numObject, diff) &&
-          numObject[diff] !== i
+          numObject[diff] !== index
         ) {
-          solutionNums[0] = this.puzzleArray[i];
+          solutionNums[0] = this.puzzleArray[index];
           solutionNums[1] = this.puzzleArray[numObject[diff]];
+          return false;
         }
-      }
+        return true;
+      });
 
       this.solution = `The Two Sum Solution is: ${
         solutionNums[0] * solutionNums[1]
