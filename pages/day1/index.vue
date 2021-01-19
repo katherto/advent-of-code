@@ -1,15 +1,33 @@
 <template>
   <div>
-    <h1>Day 1 Exercise</h1>
-    <textarea
-      id="puzzleData"
-      v-model="puzzleData"
-      name="puzzle_data"
-      cols="30"
-      rows="10"
-    ></textarea>
-    <input type="button" value="Find Solution" @click="solve()" />
-    <p v-if="solution">The solution is: {{ solution }}</p>
+    <div class="wrapper mx-auto max-w-lg flex flex-col items-center">
+      <h1 class="text-5xl">Day 1 Exercise</h1>
+      <PrimaryLink
+        :link="{
+          src: 'https://adventofcode.com/2020/day/1/input',
+          title: 'Get Puzzle Input',
+        }"
+      />
+      <textarea
+        v-model="puzzleData"
+        class="mt-4 border-black border-solid border-2 text-center"
+        name="puzzle_data"
+        placeholder="Paste puzzle data here"
+        cols="30"
+        rows="10"
+      ></textarea>
+      <PrimaryButton
+        class="mt-4"
+        :button-value="'Find Two Sum Solution'"
+        @click.native="solveTwoSum()"
+      />
+      <PrimaryButton
+        class="mt-4"
+        :button-value="'Find Three Sum Solution'"
+        @click.native="solveThreeSum()"
+      />
+      <p v-if="solution" class="mt-4 text-2xl font-bold">{{ solution }}</p>
+    </div>
   </div>
 </template>
 
@@ -27,7 +45,7 @@ export default {
     },
   },
   methods: {
-    solve() {
+    solveTwoSum() {
       const numObject = {};
       const solutionNums = [];
 
@@ -46,7 +64,9 @@ export default {
         }
       }
 
-      this.solution = solutionNums[0] * solutionNums[1];
+      this.solution = `The Two Sum Solution is: ${
+        solutionNums[0] * solutionNums[1]
+      }`;
     },
   },
 };
