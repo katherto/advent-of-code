@@ -2,6 +2,8 @@
 
 This is my repo containing solutions for various day to day coding exercises at [Advent of Code](https://adventofcode.com/)
 
+The build for this app can be found on [Netlify](https://katherto-advent.netlify.app/)
+
 ## Build Setup
 
 ```bash
